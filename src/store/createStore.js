@@ -3,12 +3,13 @@ import thunk from 'redux-thunk'
 import { browserHistory } from 'react-router'
 import makeRootReducer from './reducers'
 import { updateLocation } from './location'
+import { createLogger } from 'redux-logger'
 
 const createStore = (initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk]
+  let middleware = [thunk]
 
   // ======================================================
   // Store Enhancers
@@ -19,6 +20,10 @@ const createStore = (initialState = {}) => {
   if (__DEV__) {
     if (typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function') {
       composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+
+      const logger = createCustomizedLogger()
+
+      middleware.push(logger)
     }
   }
 
@@ -46,6 +51,16 @@ const createStore = (initialState = {}) => {
   }
 
   return store
+}
+
+const createCustomizedLogger = () => {
+  const logger = createLogger({
+    collapsed: true,
+    duration: true,
+    diff: true
+  })
+
+  return logger
 }
 
 export default createStore
