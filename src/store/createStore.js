@@ -4,6 +4,8 @@ import { browserHistory } from 'react-router'
 import makeRootReducer from './reducers'
 import { updateLocation } from './location'
 import { createLogger } from 'redux-logger'
+import createSagaMiddleware from 'redux-saga'
+import mySaga from '../routes/Counter/modules/sagas'
 
 const createStore = (initialState = {}) => {
   // ======================================================
@@ -16,6 +18,8 @@ const createStore = (initialState = {}) => {
   // ======================================================
   const enhancers = []
   let composeEnhancers = compose
+  const sagaMiddleware = createSagaMiddleware()
+  middleware.push(sagaMiddleware)
 
   if (__DEV__) {
     if (typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function') {
@@ -38,6 +42,9 @@ const createStore = (initialState = {}) => {
       ...enhancers
     )
   )
+
+  sagaMiddleware.run(mySaga)
+
   store.asyncReducers = {}
 
   // To unsubscribe, invoke `store.unsubscribeHistory()` anytime
