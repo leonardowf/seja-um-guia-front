@@ -16,7 +16,6 @@ import Counter from '../components/Counter'
 const mapDispatchToProps = {
   increment : () => increment(1),
   doubleAsync,
-  searchVolume
 }
 
 const mapStateToProps = (state) => ({

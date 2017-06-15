@@ -1,11 +1,12 @@
 import { applyMiddleware, compose, createStore as createReduxStore } from 'redux'
 import thunk from 'redux-thunk'
-import { browserHistory } from 'react-router'
 import makeRootReducer from './reducers'
-import { updateLocation } from './location'
 import { createLogger } from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
-import mySaga from '../routes/Counter/modules/sagas'
+import mySaga from '../routes/VolumeList/modules/sagas'
+import { browserHistory } from 'react-router'
+import { routerMiddleware } from 'react-router-redux'
+
 
 const createStore = (initialState = {}) => {
   // ======================================================
@@ -31,6 +32,9 @@ const createStore = (initialState = {}) => {
     }
   }
 
+  const routerMiddlewareBrowserHistory = routerMiddleware(browserHistory)
+  middleware.push(routerMiddlewareBrowserHistory)
+
   // ======================================================
   // Store Instantiation and HMR Setup
   // ======================================================
@@ -48,7 +52,7 @@ const createStore = (initialState = {}) => {
   store.asyncReducers = {}
 
   // To unsubscribe, invoke `store.unsubscribeHistory()` anytime
-  store.unsubscribeHistory = browserHistory.listen(updateLocation(store))
+  // store.unsubscribeHistory = browserHistory.listen(updateLocation(store))
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {

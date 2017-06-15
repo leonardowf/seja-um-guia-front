@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import './styles/main.scss'
+import { browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 
 // Store Initialization
 // ------------------------------------
@@ -14,9 +16,10 @@ const MOUNT_NODE = document.getElementById('root')
 let render = () => {
   const App = require('./components/App').default
   const routes = require('./routes/index').default(store)
+  const history = syncHistoryWithStore(browserHistory, store)
 
   ReactDOM.render(
-    <App store={store} routes={routes} />,
+    <App store={store} routes={routes} history={history}/>,
     MOUNT_NODE
   )
 }
