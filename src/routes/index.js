@@ -3,6 +3,7 @@ import CoreLayout from '../layouts/PageLayout/PageLayout'
 import Home from './Home'
 import CounterRoute from './Counter'
 import VolumeListRoute from './VolumeList'
+import VolumeDetailRoute from './VolumeDetail'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -13,7 +14,8 @@ export const createRoutes = (store) => ({
   indexRoute  : Home,
   childRoutes : [
     CounterRoute(store),
-    VolumeListRoute(store)
+    VolumeListRoute(store),
+    VolumeDetailRoute(store)
   ]
 })
 
