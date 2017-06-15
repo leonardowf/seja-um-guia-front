@@ -1,19 +1,10 @@
 import { connect } from 'react-redux'
 import VolumeList from '../components/VolumeList'
-import { searchVolume, volumesSelector } from '../modules/volumeList'
-import { push } from 'react-router-redux'
-
-const onClickVolume = (volume) => {
-  return {
-    type: "asdas",
-    payload: volume
-  }
-  console.log("aquiiii")
-}
+import { searchVolume, volumesSelector, selectVolumeFromList } from '../modules/volumeList'
 
 const mapDispatchToProps = {
   searchVolume,
-  onClickVolume: () => (push("/"))
+  onClickVolume: selectVolumeFromList
 }
 
 const mapStateToProps = (state) => {

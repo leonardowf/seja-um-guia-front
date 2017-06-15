@@ -3,7 +3,9 @@ import thunk from 'redux-thunk'
 import makeRootReducer from './reducers'
 import { createLogger } from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
-import mySaga from '../routes/VolumeList/modules/sagas'
+import volumeListSaga from '../routes/VolumeList/modules/sagas'
+import volumeDetailSaga from '../routes/VolumeDetail/modules/sagas'
+
 import { browserHistory } from 'react-router'
 import { routerMiddleware } from 'react-router-redux'
 
@@ -28,7 +30,7 @@ const createStore = (initialState = {}) => {
 
       const logger = createCustomizedLogger()
 
-      middleware.push(logger)
+      // middleware.push(logger)
     }
   }
 
@@ -47,7 +49,8 @@ const createStore = (initialState = {}) => {
     )
   )
 
-  sagaMiddleware.run(mySaga)
+  sagaMiddleware.run(volumeListSaga)
+  sagaMiddleware.run(volumeDetailSaga)
 
   store.asyncReducers = {}
 

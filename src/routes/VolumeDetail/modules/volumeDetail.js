@@ -1,6 +1,14 @@
+export const LOAD_VOLUME_ID = 'LOAD_VOLUME_ID'
+
+export const loadVolumeWithId = (volumeId) => ({
+  type: LOAD_VOLUME_ID,
+  payload: volumeId
+})
+
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
+
 const ACTION_HANDLERS = {
 }
 
@@ -15,3 +23,8 @@ export default function reducer (state = initialState, action) {
 
   return handler ? handler(state, action) : state
 }
+
+// ------------------------------------
+// Selectors
+// ------------------------------------
+
