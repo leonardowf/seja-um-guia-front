@@ -19,8 +19,14 @@ class SearchField extends React.Component {
 
   render() {
     return (
-      <div>
-        <input type='text' value={this.state.inputValue} onChange={this.didChangeText}/>
+      <div className="row">
+          <div className="form-group">
+            <input type='text'
+                   className="form-control"
+                   value={this.state.inputValue}
+                   onChange={this.didChangeText}
+                   placeholder='Nome do livro, autor ou descrição...'/>
+          </div>
       </div>
     )
   }

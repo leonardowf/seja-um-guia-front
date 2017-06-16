@@ -25,7 +25,25 @@ class VolumeDetail extends React.Component {
 
   render() {
     if (this.props.volume) {
-      return <h1>Hello, {this.props.volume.id}</h1>;
+      const {
+        volumeInfo
+      } = this.props.volume
+
+      const {
+        title,
+        subtitle
+      } = volumeInfo
+
+      return (
+      <div className="panel panel-default">
+        <div className="panel-body">
+          <div className='page-header'>
+            <h1>{title}{' '}<small>{subtitle}</small></h1>
+          </div>
+        </div>
+      </div>
+
+      )
     }
 
     return this.emptyVolumeRender()
